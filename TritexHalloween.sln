@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.Oxygen", "TritexHalloween.Oxygen\TritexHalloween.Oxygen.csproj", "{3268F200-79A9-4C82-92FF-7194AFAE9002}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientExample", "Client\Client\ClientExample\ClientExample.csproj", "{D2B69072-8CC4-4142-856B-5F85C363A528}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerExample", "Server\Server\ServerExample\ServerExample.csproj", "{973A7C14-3577-4595-A476-302B41C58194}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.Server", "TritexHalloween.Server\TritexHalloween.Server.csproj", "{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.StoryObjects", "TritexHalloween.StoryObjects\TritexHalloween.StoryObjects.csproj", "{02B00BB5-87F0-40F2-96BD-4EBDB46B9968}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.Networking", "TritexHalloween.Networking\TritexHalloween.Networking.csproj", "{104D3634-79B6-4D25-8552-FB1B79CFE367}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2B69072-8CC4-4142-856B-5F85C363A528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2B69072-8CC4-4142-856B-5F85C363A528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2B69072-8CC4-4142-856B-5F85C363A528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2B69072-8CC4-4142-856B-5F85C363A528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{973A7C14-3577-4595-A476-302B41C58194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973A7C14-3577-4595-A476-302B41C58194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973A7C14-3577-4595-A476-302B41C58194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973A7C14-3577-4595-A476-302B41C58194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02B00BB5-87F0-40F2-96BD-4EBDB46B9968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02B00BB5-87F0-40F2-96BD-4EBDB46B9968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02B00BB5-87F0-40F2-96BD-4EBDB46B9968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02B00BB5-87F0-40F2-96BD-4EBDB46B9968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{104D3634-79B6-4D25-8552-FB1B79CFE367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{104D3634-79B6-4D25-8552-FB1B79CFE367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{104D3634-79B6-4D25-8552-FB1B79CFE367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{104D3634-79B6-4D25-8552-FB1B79CFE367}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8CB9C28-95E6-40FB-BFA0-106E60D83ED1}
+	EndGlobalSection
+EndGlobal
