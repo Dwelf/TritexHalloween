@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClientExample</RootNamespace>
     <AssemblyName>ClientExample</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,6 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\TritexHalloween.Networking\TritexHalloween.Networking.csproj">
+      <Project>{104d3634-79b6-4d25-8552-fb1b79cfe367}</Project>
+      <Name>TritexHalloween.Networking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TritexHalloween.StoryObjects\TritexHalloween.StoryObjects.csproj">
+      <Project>{02b00bb5-87f0-40f2-96bd-4ebdb46b9968}</Project>
+      <Name>TritexHalloween.StoryObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TritexHalloween.StoryObjects
 {
+    [Serializable]
     public enum HeartRateMode
     {
         Error,

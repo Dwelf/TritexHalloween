@@ -88,11 +88,5 @@
   <ItemGroup>
     <None Include="Resources\SpinningMan.gif" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TritexHalloween.Server\TritexHalloween.Server.csproj">
-      <Project>{2b09866b-d5bf-44bb-a83f-4d7b6fad2caf}</Project>
-      <Name>TritexHalloween.Server</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

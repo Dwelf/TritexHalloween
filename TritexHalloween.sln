@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientExample", "Client\Cli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerExample", "Server\Server\ServerExample\ServerExample.csproj", "{973A7C14-3577-4595-A476-302B41C58194}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.Server", "TritexHalloween.Server\TritexHalloween.Server.csproj", "{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.StoryObjects", "TritexHalloween.StoryObjects\TritexHalloween.StoryObjects.csproj", "{02B00BB5-87F0-40F2-96BD-4EBDB46B9968}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.Networking", "TritexHalloween.Networking\TritexHalloween.Networking.csproj", "{104D3634-79B6-4D25-8552-FB1B79CFE367}"
@@ -33,10 +31,6 @@ Global
 		{973A7C14-3577-4595-A476-302B41C58194}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{973A7C14-3577-4595-A476-302B41C58194}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{973A7C14-3577-4595-A476-302B41C58194}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B09866B-D5BF-44BB-A83F-4D7B6FAD2CAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{02B00BB5-87F0-40F2-96BD-4EBDB46B9968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02B00BB5-87F0-40F2-96BD-4EBDB46B9968}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02B00BB5-87F0-40F2-96BD-4EBDB46B9968}.Release|Any CPU.ActiveCfg = Release|Any CPU

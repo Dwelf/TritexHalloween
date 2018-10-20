@@ -51,9 +51,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TritexHalloween.Server\TritexHalloween.Server.csproj">
-      <Project>{2b09866b-d5bf-44bb-a83f-4d7b6fad2caf}</Project>
-      <Name>TritexHalloween.Server</Name>
+    <ProjectReference Include="..\..\..\TritexHalloween.Networking\TritexHalloween.Networking.csproj">
+      <Project>{104D3634-79B6-4D25-8552-FB1B79CFE367}</Project>
+      <Name>TritexHalloween.Networking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TritexHalloween.StoryObjects\TritexHalloween.StoryObjects.csproj">
+      <Project>{02b00bb5-87f0-40f2-96bd-4ebdb46b9968}</Project>
+      <Name>TritexHalloween.StoryObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
