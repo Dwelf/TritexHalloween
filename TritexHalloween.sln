@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.MIssonContr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.StoryManager", "TritexHalloween.StoryManager\TritexHalloween.StoryManager.csproj", "{61EA91E6-E637-4FDD-B659-94C306E86265}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.Oxygen", "TritexHalloween.Oxygen\TritexHalloween.Oxygen.csproj", "{3268F200-79A9-4C82-92FF-7194AFAE9002}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{61EA91E6-E637-4FDD-B659-94C306E86265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61EA91E6-E637-4FDD-B659-94C306E86265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61EA91E6-E637-4FDD-B659-94C306E86265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
