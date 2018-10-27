@@ -15,14 +15,21 @@ namespace ClientExample
 
         static void Main(string[] args)
         {
+            if (Console.ReadKey().Key == ConsoleKey.R)
+            {
+            }
+
             try
             {
                 var client = new Client(IPAddress.Parse("127.0.0.1"));
 
                 var adventure = new Adventurer();
-                adventure.Name = "Winning";
+                adventure.Name = "Joseph";
                 adventure.Status = "Biwinning";
-
+                adventure.Temperature = 30;
+                adventure.SuitPressure = 3;
+                adventure.OxygenRemaining = 3000;
+                adventure.HeartRateMode = HeartRateMode.Resting;
                 client.Send(0, adventure);
             }
             catch (Exception e)

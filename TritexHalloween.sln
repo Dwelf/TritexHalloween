@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.Oxygen", "TritexHalloween.Oxygen\TritexHalloween.Oxygen.csproj", "{3268F200-79A9-4C82-92FF-7194AFAE9002}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientExample", "Client\Client\ClientExample\ClientExample.csproj", "{D2B69072-8CC4-4142-856B-5F85C363A528}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerExample", "Server\Server\ServerExample\ServerExample.csproj", "{973A7C14-3577-4595-A476-302B41C58194}"
@@ -13,16 +11,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.StoryObject
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.Networking", "TritexHalloween.Networking\TritexHalloween.Networking.csproj", "{104D3634-79B6-4D25-8552-FB1B79CFE367}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.MIssonControlDesktop", "TritexHalloween.MIssonControlDesktop\TritexHalloween.MIssonControlDesktop.csproj", "{21E30D0C-A2AC-4C50-B364-A59010A66285}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TritexHalloween.StoryManager", "TritexHalloween.StoryManager\TritexHalloween.StoryManager.csproj", "{61EA91E6-E637-4FDD-B659-94C306E86265}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3268F200-79A9-4C82-92FF-7194AFAE9002}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2B69072-8CC4-4142-856B-5F85C363A528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2B69072-8CC4-4142-856B-5F85C363A528}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2B69072-8CC4-4142-856B-5F85C363A528}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +37,14 @@ Global
 		{104D3634-79B6-4D25-8552-FB1B79CFE367}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{104D3634-79B6-4D25-8552-FB1B79CFE367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{104D3634-79B6-4D25-8552-FB1B79CFE367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21E30D0C-A2AC-4C50-B364-A59010A66285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21E30D0C-A2AC-4C50-B364-A59010A66285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21E30D0C-A2AC-4C50-B364-A59010A66285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21E30D0C-A2AC-4C50-B364-A59010A66285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61EA91E6-E637-4FDD-B659-94C306E86265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61EA91E6-E637-4FDD-B659-94C306E86265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61EA91E6-E637-4FDD-B659-94C306E86265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61EA91E6-E637-4FDD-B659-94C306E86265}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

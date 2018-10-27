@@ -14,5 +14,6 @@ namespace TritexHalloween.StoryObjects
         public decimal Temperature { get; set; }
         public decimal SuitPressure { get; set; }
         public HeartRateMode HeartRateMode { get; set; }
+        public decimal OxygenRemaining { get; set; }
     }
 }
