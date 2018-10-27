@@ -270,7 +270,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1530, 862);
             this.Controls.Add(this.splc_Main);
-            this.DoubleBuffered = true;
+            
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FRM_OxygenIndicator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

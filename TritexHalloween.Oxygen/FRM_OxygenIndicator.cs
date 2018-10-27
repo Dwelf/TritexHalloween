@@ -12,6 +12,7 @@ namespace TritexHalloween.Oxygen
 {
     using System.IO;
     using System.Net;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Threading;
@@ -34,9 +35,13 @@ namespace TritexHalloween.Oxygen
             InitializeComponent();
             this.Server.RunWorkerAsync();
             this.heartRateRandom = new Random();
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.DoubleBuffer, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            DoubleBuffered(this.lb_heartrate, true);
+            DoubleBuffered(this.lb_oxygen, true);
+            DoubleBuffered(this.tableLayoutPanel1, true);
+
         }
 
         private void FRM_OxygenIndicator_Load(object sender, EventArgs e)
@@ -85,6 +90,9 @@ namespace TritexHalloween.Oxygen
 
         private void setOxygenHeartRate()
         {
+            this.lb_oxygen.Parent.SuspendLayout();
+            this.lb_heartrate.Parent.SuspendLayout();
+
             var currentHeartRate = 0;
 
             switch (this.adventurer.HeartRateMode)
@@ -118,11 +126,20 @@ namespace TritexHalloween.Oxygen
             this.adventurer.OxygenRemaining -= (currentHeartRate / 10m * (0.8m + (currentHeartRate / 1000m))) / 60m;
             this.lb_oxygen.Text = this.adventurer.OxygenRemaining.ToString("n2");
             this.lb_heartrate.Text = currentHeartRate.ToString();
+            this.lb_oxygen.Parent.ResumeLayout();
+            this.lb_heartrate.Parent.ResumeLayout();
         }
 
         private void tmr_respiration_Tick(object sender, EventArgs e)
         {
             this.setOxygenHeartRate();
+        }
+
+        public static void DoubleBuffered(Control formControl, bool setting)
+        {
+            Type conType = formControl.GetType();
+            PropertyInfo pi = conType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(formControl, setting, null);
         }
     }
 }
