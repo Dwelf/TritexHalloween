@@ -43,6 +43,11 @@
     <Compile Include="Adventurer.cs" />
     <Compile Include="HeartRateMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetHeartRate.cs" />
+    <Compile Include="SetOxygen.cs" />
+    <Compile Include="SetStatus.cs" />
+    <Compile Include="SetSuitPressure.cs" />
+    <Compile Include="SetTemperature.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

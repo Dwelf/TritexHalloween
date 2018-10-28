@@ -40,7 +40,7 @@ namespace TritexHalloween.Oxygen
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             DoubleBuffered(this.lb_heartrate, true);
             DoubleBuffered(this.lb_oxygen, true);
-            DoubleBuffered(this.tableLayoutPanel1, true);
+            DoubleBuffered(this.TLP_Main, true);
 
         }
 
@@ -61,30 +61,94 @@ namespace TritexHalloween.Oxygen
 
         private void UpdateAdventurer(Message message)
         {
-            if (message.ObjectType == 0)
+            IFormatter formatter;
+            switch (message.ObjectType)
             {
-                IFormatter formatter;
-                using (var stream = new MemoryStream(message.Data))
-                {
-                    formatter = new BinaryFormatter();
-                    var adventurer = (Adventurer)formatter.Deserialize(stream);
-                    this.Invoke((MethodInvoker)delegate
+                default:
+                case 0:
+                    using (var stream = new MemoryStream(message.Data))
+                    {
+                        formatter = new BinaryFormatter();
+                        var adv = (Adventurer)formatter.Deserialize(stream);
+                        this.Invoke((MethodInvoker)delegate
                         {
-                            this.SetAdventurer(adventurer);
+                            this.SetAdventurer(adv);
                         });
-                }
+                    }
+                    break;
+                case 1: // heart Rate
+                    using (var stream = new MemoryStream(message.Data))
+                    {
+                        formatter = new BinaryFormatter();
+                        var heatRate = (SetHeatRate)formatter.Deserialize(stream);
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.adventurer.HeartRateMode = heatRate.NewHeartRateMode;
+                            this.SetAdventurer(this.adventurer);
+                        });
+                    }
+                    break;
+                case 2: // oxygen
+                    using (var stream = new MemoryStream(message.Data))
+                    {
+                        formatter = new BinaryFormatter();
+                        var oxygen = (SetOxygen)formatter.Deserialize(stream);
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.adventurer.OxygenRemaining += oxygen.NewOxygen;
+                            this.SetAdventurer(this.adventurer);
+                        });
+                    }
+                    break;
+                case 3: // status
+                    using (var stream = new MemoryStream(message.Data))
+                    {
+                        formatter = new BinaryFormatter();
+                        var setStatus = (SetStatus)formatter.Deserialize(stream);
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.adventurer.Status = setStatus.NewStatus;
+                            this.SetAdventurer(this.adventurer);
+                        });
+                    }
+                    break;
+                case 4: // suit pressure
+                    using (var stream = new MemoryStream(message.Data))
+                    {
+                        formatter = new BinaryFormatter();
+                        var setSuitPressure = (SetSuitPressure)formatter.Deserialize(stream);
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.adventurer.SuitPressure = setSuitPressure.NewPressure;
+                            this.SetAdventurer(this.adventurer);
+                        });
+                    }
+                    break;
+                case 5: // temperature
+                    using (var stream = new MemoryStream(message.Data))
+                    {
+                        formatter = new BinaryFormatter();
+                        var setTemperature = (SetTemperature)formatter.Deserialize(stream);
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.adventurer.Temperature = setTemperature.NewTemperature;
+                            this.SetAdventurer(this.adventurer);
+                        });
+                    }
+                    break;
             }
+
         }
 
-        private void SetAdventurer(Adventurer adventurer)
+        private void SetAdventurer(Adventurer adv)
         {
             this.tmr_respiration.Stop();
-
-            this.adventurer = adventurer;
+            this.adventurer = adv;
             this.lb_SubjectValue.Text = adventurer.Name;
             this.lb_temperature.Text = adventurer.Temperature.ToString("N2") + "C";
             this.lb_suitpressure.Text = adventurer.SuitPressure + "-Bar";
             this.lb_oxygen.Text = adventurer.OxygenRemaining.ToString("N2") + "L";
+            this.lb_StatusValue.Text = adventurer.Status;
             this.tmr_respiration.Start();
         }
 
@@ -123,8 +187,8 @@ namespace TritexHalloween.Oxygen
                     break;
             }
 
-            this.adventurer.OxygenRemaining -= (currentHeartRate / 10m * (0.8m + (currentHeartRate / 1000m))) / 60m;
-            this.lb_oxygen.Text = this.adventurer.OxygenRemaining.ToString("n2");
+            this.adventurer.OxygenRemaining -= currentHeartRate / 10m * (0.8m + currentHeartRate / 1000m) / 60m;
+            this.lb_oxygen.Text = this.adventurer.OxygenRemaining.ToString("n2")+ "L";
             this.lb_heartrate.Text = currentHeartRate.ToString();
             this.lb_oxygen.Parent.ResumeLayout();
             this.lb_heartrate.Parent.ResumeLayout();
