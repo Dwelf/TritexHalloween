@@ -28,8 +28,8 @@ namespace ClientExample
                 adventure.Status = "Biwinning";
                 adventure.Temperature = 30;
                 adventure.SuitPressure = 3;
-                adventure.OxygenRemaining = 3000;
-                adventure.HeartRateMode = HeartRateMode.Resting;
+                adventure.OxygenRemaining = TimeSpan.FromDays(2);
+                adventure.HeartRateMode = HeartRateMode.Green;
                 client.Send(0, adventure);
             }
             catch (Exception e)

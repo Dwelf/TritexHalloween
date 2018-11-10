@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TritexHalloween.Oxygen
@@ -15,7 +10,6 @@ namespace TritexHalloween.Oxygen
     using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
-    using System.Threading;
 
     using TritexHalloween.Networking;
     using TritexHalloween.StoryObjects;
@@ -26,21 +20,18 @@ namespace TritexHalloween.Oxygen
 
         private Adventurer adventurer;
 
-        private Random heartRateRandom;
-
         public FRM_OxygenIndicator(string ip)
         {
             this.ip = IPAddress.Parse(ip);
-           
+
             InitializeComponent();
-            this.Server.RunWorkerAsync();
-            this.heartRateRandom = new Random();
-            this.SetStyle(ControlStyles.UserPaint, true);
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            DoubleBuffered(this.lb_heartrate, true);
-            DoubleBuffered(this.lb_oxygen, true);
-            DoubleBuffered(this.TLP_Main, true);
+            Server.RunWorkerAsync();
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            DoubleBuffered(lb_heartrate, true);
+            DoubleBuffered(lb_oxygen, true);
+            DoubleBuffered(TLP_Main, true);
 
         }
 
@@ -55,7 +46,7 @@ namespace TritexHalloween.Oxygen
 
         private void Server_DoWork(object sender, DoWorkEventArgs e)
         {
-            var server = new Server(this.ip, this.UpdateAdventurer);
+            var server = new Server(ip, UpdateAdventurer);
             server.Start();
         }
 
@@ -70,9 +61,10 @@ namespace TritexHalloween.Oxygen
                     {
                         formatter = new BinaryFormatter();
                         var adv = (Adventurer)formatter.Deserialize(stream);
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
-                            this.SetAdventurer(adv);
+                            SetAdventurer(adv);
+                            AddMessage("Satellite link established...");
                         });
                     }
                     break;
@@ -81,10 +73,24 @@ namespace TritexHalloween.Oxygen
                     {
                         formatter = new BinaryFormatter();
                         var heatRate = (SetHeatRate)formatter.Deserialize(stream);
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
-                            this.adventurer.HeartRateMode = heatRate.NewHeartRateMode;
-                            this.SetAdventurer(this.adventurer);
+                            adventurer.HeartRateMode = heatRate.NewHeartRateMode;
+                            SetAdventurer(adventurer);
+                            lb_heartrate.Parent.SuspendLayout();
+                            switch (adventurer.HeartRateMode)
+                            {
+                                case HeartRateMode.Green:
+                                    lb_heartrate.ForeColor = Color.LawnGreen;
+                                    break;
+                                case HeartRateMode.Yellow:
+                                    lb_heartrate.ForeColor = Color.Yellow;
+                                    break;
+                                case HeartRateMode.Red:
+                                    lb_heartrate.ForeColor = Color.Red;
+                                    break;
+                            }
+                            lb_heartrate.ResumeLayout();
                         });
                     }
                     break;
@@ -93,10 +99,9 @@ namespace TritexHalloween.Oxygen
                     {
                         formatter = new BinaryFormatter();
                         var oxygen = (SetOxygen)formatter.Deserialize(stream);
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
-                            this.adventurer.OxygenRemaining += oxygen.NewOxygen;
-                            this.SetAdventurer(this.adventurer);
+                            adventurer.OxygenRemaining = adventurer.OxygenRemaining.Subtract(TimeSpan.FromMinutes(Convert.ToDouble(oxygen.NewOxygen)));
                         });
                     }
                     break;
@@ -105,10 +110,11 @@ namespace TritexHalloween.Oxygen
                     {
                         formatter = new BinaryFormatter();
                         var setStatus = (SetStatus)formatter.Deserialize(stream);
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
-                            this.adventurer.Status = setStatus.NewStatus;
-                            this.SetAdventurer(this.adventurer);
+                            adventurer.Status = setStatus.NewStatus;
+                            SetAdventurer(adventurer);
+                            
                         });
                     }
                     break;
@@ -117,10 +123,10 @@ namespace TritexHalloween.Oxygen
                     {
                         formatter = new BinaryFormatter();
                         var setSuitPressure = (SetSuitPressure)formatter.Deserialize(stream);
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
-                            this.adventurer.SuitPressure = setSuitPressure.NewPressure;
-                            this.SetAdventurer(this.adventurer);
+                            adventurer.SuitPressure = setSuitPressure.NewPressure;
+                            SetAdventurer(adventurer);
                         });
                     }
                     break;
@@ -129,74 +135,51 @@ namespace TritexHalloween.Oxygen
                     {
                         formatter = new BinaryFormatter();
                         var setTemperature = (SetTemperature)formatter.Deserialize(stream);
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
-                            this.adventurer.Temperature = setTemperature.NewTemperature;
-                            this.SetAdventurer(this.adventurer);
+                            adventurer.Temperature = setTemperature.NewTemperature;
+                            SetAdventurer(adventurer);
                         });
                     }
                     break;
-            }
+                case 6:
+                    using (var stream = new MemoryStream(message.Data))
+                    {
+                        formatter = new BinaryFormatter();
+                        var setTemperature = (Breach)formatter.Deserialize(stream);
+                        Invoke((MethodInvoker)delegate
+                            {
+                                adventurer.OxygenRemaining = adventurer.OxygenRemaining.Subtract(TimeSpan.FromSeconds(setTemperature.MinutesLost));
+                                AddMessage($"Breach ({setTemperature.MinutesLost}) Minutes of Oxygen lost");
+                            });
+                    }
 
+                    break;
+            }
         }
 
         private void SetAdventurer(Adventurer adv)
         {
-            this.tmr_respiration.Stop();
-            this.adventurer = adv;
-            this.lb_SubjectValue.Text = adventurer.Name;
-            this.lb_temperature.Text = adventurer.Temperature.ToString("N2") + "C";
-            this.lb_suitpressure.Text = adventurer.SuitPressure + "-Bar";
-            this.lb_oxygen.Text = adventurer.OxygenRemaining.ToString("N2") + "L";
-            this.lb_StatusValue.Text = adventurer.Status;
-            this.tmr_respiration.Start();
+            tmr_respiration.Stop();
+            adventurer = adv;
+            lb_SubjectValue.Text = adventurer.Name;
+            lb_temperature.Text = adventurer.Temperature.ToString("N2") + "C";
+            lb_oxygen.Text = adventurer.OxygenRemaining.ToString("N2") + "L";
+            lb_StatusValue.Text = adventurer.Status;
+            tmr_respiration.Start();
         }
 
-        private void setOxygenHeartRate()
+        private void setOxygenHeartRate(double seconds = 1)
         {
-            this.lb_oxygen.Parent.SuspendLayout();
-            this.lb_heartrate.Parent.SuspendLayout();
-
-            var currentHeartRate = 0;
-
-            switch (this.adventurer.HeartRateMode)
-            {
-                default:
-                case HeartRateMode.Error:
-                    break;
-                case HeartRateMode.BelowResting:
-                    currentHeartRate = this.heartRateRandom.Next(50, 60);
-                    break;
-                case HeartRateMode.Resting: // 60
-                    currentHeartRate = this.heartRateRandom.Next(60, 65);
-                    break;
-                case HeartRateMode.AboveResting:
-                    currentHeartRate = this.heartRateRandom.Next(72, 85);
-                    break;
-                case HeartRateMode.Stressed:
-                    currentHeartRate = this.heartRateRandom.Next(72, 100);
-                    break;
-                case HeartRateMode.ModerateExercise: // 
-                    currentHeartRate = this.heartRateRandom.Next(100, 130);
-                    break;
-                case HeartRateMode.High: // 16
-                    currentHeartRate = this.heartRateRandom.Next(140, 160);
-                    break;
-                case HeartRateMode.Extreme: // 20
-                    currentHeartRate = this.heartRateRandom.Next(160, 200);
-                    break;
-            }
-
-            this.adventurer.OxygenRemaining -= currentHeartRate / 10m * (0.8m + currentHeartRate / 1000m) / 60m;
-            this.lb_oxygen.Text = this.adventurer.OxygenRemaining.ToString("n2")+ "L";
-            this.lb_heartrate.Text = currentHeartRate.ToString();
-            this.lb_oxygen.Parent.ResumeLayout();
-            this.lb_heartrate.Parent.ResumeLayout();
+            lb_oxygen.Parent.SuspendLayout();
+            adventurer.OxygenRemaining = adventurer.OxygenRemaining.Subtract(TimeSpan.FromSeconds(seconds));
+            lb_oxygen.Text = adventurer.OxygenRemaining.ToString();
+            lb_oxygen.Parent.ResumeLayout();
         }
 
         private void tmr_respiration_Tick(object sender, EventArgs e)
         {
-            this.setOxygenHeartRate();
+            setOxygenHeartRate();
         }
 
         public static void DoubleBuffered(Control formControl, bool setting)
@@ -204,6 +187,31 @@ namespace TritexHalloween.Oxygen
             Type conType = formControl.GetType();
             PropertyInfo pi = conType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(formControl, setting, null);
+        }
+
+        private void lb_OxygenRemaning_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddMessage(string message)
+        {
+            rtb_Events.Text += DateTime.Now.ToShortTimeString() + ": " + message + Environment.NewLine;
+        }
+
+        private void lb_HeartRateLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TLP_Main_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

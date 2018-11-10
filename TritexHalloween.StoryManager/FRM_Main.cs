@@ -26,11 +26,11 @@ namespace TritexHalloween.StoryManager
             adventurer.Status = txt_Status.Text;
             adventurer.Name = txt_Name.Text;
             adventurer.Temperature = decimal.Parse(txt_Temperature.Text);
-            adventurer.OxygenRemaining = decimal.Parse(txt_Oxygen.Text);
-            adventurer.SuitPressure = decimal.Parse(txt_Pressure.Text);
+            adventurer.OxygenRemaining = TimeSpan.FromMinutes(int.Parse(txt_Oxygen.Text));
             Enum.TryParse(lb_HeartRate.SelectedItem.ToString(), out HeartRateMode hr);
             adventurer.HeartRateMode = hr;
-            client.Send(0, adventurer);
+            var result = client.Send(0, adventurer);
+            AddMessage(result);
         }
 
         private void btn_Status_Click(object sender, EventArgs e)
@@ -39,29 +39,94 @@ namespace TritexHalloween.StoryManager
             client.Send(3, statusSetter);
         }
 
-        private void btn_setSuitPressure_Click(object sender, EventArgs e)
-        {
-            var statusSetter = new SetSuitPressure { NewPressure = decimal.Parse(txb_SuitPressureSetter.Text) };
-            client.Send(4, statusSetter);
-        }
-
         private void btn_heartRate_Click(object sender, EventArgs e)
         {
-            Enum.TryParse(lb_HeartRateSetter.SelectedItem.ToString(), out HeartRateMode hr);
-            var statusSetter = new SetHeatRate() { NewHeartRateMode = hr };
-            client.Send(1, statusSetter);
+            var hrValue = (HeartRateMode)HeartRateMode.Parse(typeof(HeartRateMode), lb_HeartRateSetter.SelectedItem.ToString());
+
+
+            var statusSetter = new SetHeatRate() { NewHeartRateMode = hrValue };
+            var result = client.Send(1, statusSetter);
+            AddMessage(result);
         }
 
         private void btn_AffectOxygen_Click(object sender, EventArgs e)
         {
-            var affectOxygen = new SetOxygen() { NewOxygen = decimal.Parse(txt_OxygenSetter.Text) };
-            client.Send(2, affectOxygen);
+            var value = DecimalParseString(txt_OxygenSetter.Text);
+
+            if (value == null)
+            {
+                return;
+            }
+
+            var affectOxygen = new SetOxygen() { NewOxygen = value.Value };
+            var result = client.Send(2, affectOxygen);
+            AddMessage(result);
         }
 
         private void btn_settemperature_Click(object sender, EventArgs e)
         {
-            var tempSetter = new SetTemperature() { NewTemperature = decimal.Parse(txt_TemperatureSetter.Text) };
-            client.Send(5, tempSetter);
+            var value = DecimalParseString(txt_TemperatureSetter.Text);
+            if (value == null)
+            {
+                return;
+            }
+
+
+            var tempSetter = new SetTemperature() { NewTemperature = value.Value };
+            var result = client.Send(5, tempSetter) + Environment.NewLine;
+            AddMessage(result);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var parsedInt = 0;
+
+            if (int.TryParse(txt_Breach.Text, out parsedInt) == false)
+            {
+                AddMessage("No value for breach");
+            }
+
+            var tempBreach = new TritexHalloween.StoryObjects.Breach(parsedInt);
+            var result = client.Send(6, tempBreach);
+            AddMessage(result);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddMessage(string message)
+        {
+            errorBox.Text += DateTime.Now.ToShortTimeString() + ": " + message + Environment.NewLine;
+        }
+
+        private decimal? DecimalParseString(string value)
+        {
+            var parsedDecimal = 0m;
+
+            if (decimal.TryParse(txt_TemperatureSetter.Text, out parsedDecimal) == false)
+            {
+                AddMessage("Not a recognised value");
+                return null;
+            }
+
+            return parsedDecimal;
+        }
+
+        private int? IntParseString(string value)
+        {
+            var parsedDecimal = 0;
+
+            if (int.TryParse(txt_TemperatureSetter.Text, out parsedDecimal) == false)
+            {
+                AddMessage("Not a recognised value");
+                return null;
+            }
+
+            return parsedDecimal;
+        }
+
+
     }
 }

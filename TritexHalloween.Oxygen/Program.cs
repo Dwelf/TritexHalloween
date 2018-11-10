@@ -14,8 +14,7 @@ namespace TritexHalloween.Oxygen
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            string ip = "127.0.0.1";
-
+            string ip = "192.168.1.65";
             var form = new FRM_OxygenIndicator(ip);
             Application.Run(form);
         }
